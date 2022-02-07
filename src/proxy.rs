@@ -81,7 +81,7 @@ impl Server {
       if readiness.is_readable() {
         trace!("read event: {:?}", token);
         match pump.drain() {
-          Ok(Some(mut dc_idx)) => {
+          Ok(Some(dc_idx)) => {
             let stream = match &self.config.dc_addr(dc_idx) {
               Some(addr) => TcpStream::connect(addr)?,
               None => {
@@ -157,7 +157,7 @@ impl Server {
 
     for token in &self.detached {
       let pump = self.pumps.get(token.0).unwrap();
-      let mut pump = pump.borrow_mut();
+      let pump = pump.borrow_mut();
       if !pump.interest().is_writable() {
         stale.insert(*token);
       }

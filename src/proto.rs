@@ -11,8 +11,8 @@ use rand::RngCore;
 pub struct Proto {
   seed: Vec<u8>,
   dc: i16,
-  dec: Box<SynchronousStreamCipher>,
-  enc: Box<SynchronousStreamCipher>,
+  dec: Box<dyn SynchronousStreamCipher>,
+  enc: Box<dyn SynchronousStreamCipher>,
 }
 
 impl Proto {
